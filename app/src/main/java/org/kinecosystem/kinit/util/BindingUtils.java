@@ -2,8 +2,12 @@ package org.kinecosystem.kinit.util;
 
 import android.databinding.BindingAdapter;
 import android.graphics.Color;
+import android.support.annotation.IdRes;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.support.constraint.Guideline;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -15,6 +19,8 @@ import android.widget.Spinner;
 import org.kinecosystem.kinit.model.earn.Answer;
 import org.kinecosystem.kinit.view.customView.AnswerSelectedOverView;
 import org.kinecosystem.kinit.view.customView.QuizAnswerView;
+
+import javax.annotation.Resource;
 
 
 public class BindingUtils {
@@ -69,6 +75,15 @@ public class BindingUtils {
         if (view != null && color != null) {
             view.setBackgroundColor(Color.parseColor(color));
         }
+    }
+
+    @BindingAdapter("app:layout_constraintTop_toBottomOf")
+    public static void setConstrainTopToBottom(View view, @IdRes int resId) {
+        ConstraintLayout constraintLayout = (ConstraintLayout) view.getParent();
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(constraintLayout);
+        constraintSet.connect(view.getId(), ConstraintSet.TOP, resId, ConstraintSet.BOTTOM);
+        constraintSet.applyTo(constraintLayout);
     }
 
     @BindingAdapter("animatedFadeIn")

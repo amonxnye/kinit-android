@@ -218,4 +218,10 @@
     <string name="i_understand">I Understand</string>
     <string name="spend_kin">Spend Kin</string>
     <string name="transfer_kin">Transfer Kin</string>
+    <string name="travel_local">Travel &amp; Local</string>
+    <string name="communications_social">Communications &amp; Social</string>
+    <string name="get">GET</string>
+    <string name="send">SEND</string>
+    <string name="about">About</string>
+
 </resources>

@@ -4,6 +4,7 @@ import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.Observable
 import android.databinding.ObservableBoolean
+import android.support.v4.app.FragmentManager
 import android.support.v4.view.PagerAdapter
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
@@ -22,7 +23,7 @@ import org.kinecosystem.kinit.server.TaskService
 import org.kinecosystem.kinit.util.Scheduler
 import org.kinecosystem.kinit.view.adapter.BalancePagerViewsAdapter
 import org.kinecosystem.kinit.view.adapter.CategoryListAdapter
-import org.kinecosystem.kinit.view.adapter.SpendPagerViewsAdapter
+import org.kinecosystem.kinit.view.adapter.SpendPagerFragmentsAdapter
 import org.kinecosystem.kinit.view.customView.AlertManager
 import org.kinecosystem.kinit.viewmodel.balance.BalanceViewModel
 import org.kinecosystem.kinit.viewmodel.earn.CategoriesViewModel
@@ -31,7 +32,7 @@ import org.kinecosystem.kinit.viewmodel.spend.SpendTabViewModel
 import javax.inject.Inject
 
 
-class TabsAdapter(val context: Context) :
+class TabsAdapter(val context: Context,private val supportFragmentManager: FragmentManager) :
         PagerAdapter() {
 
     private var models = arrayOfNulls<TabViewModel?>(NUMBER_OF_TABS)
@@ -108,7 +109,7 @@ class TabsAdapter(val context: Context) :
 
 
         binding.model = SpendTabViewModel(Navigator(context))
-        binding.viewPager.adapter = SpendPagerViewsAdapter(context, binding)
+        binding.viewPager.adapter = SpendPagerFragmentsAdapter(context, supportFragmentManager)
         binding.spendNavTabs.setupWithViewPager(binding.viewPager)
         models[position] = binding.model
         return binding.root
